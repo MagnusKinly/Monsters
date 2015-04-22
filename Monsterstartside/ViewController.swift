@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+ 
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +23,32 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBOutlet weak var slider: UISlider!
 
+    @IBOutlet weak var label: UILabel!
+    @IBAction func sliderValueChanged(sender: UISlider) {
+        
+        var currentValue = Int(sender.value)
+        
+        label.text = "\(currentValue)"
+    }
+    
+    @IBOutlet weak var Slider1: UISlider!
+    
+    @IBOutlet weak var label1: UILabel!
+    
+    @IBAction func slider1ValueChanged(sender: UISlider) {
+        
+        var currentValue = Int(sender.value)
+        
+        label1.text = "\(currentValue)"
+    }
+    
+    
+    
+ 
+            
+    
+    
 }
 
