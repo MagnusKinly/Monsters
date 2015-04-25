@@ -13,13 +13,15 @@ class Aktiv: UIViewController, CLLocationManagerDelegate {
     //TRACKER
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var trackButton: UIButton!
+    @IBOutlet var lblCalories: UILabel!
     
+    @IBOutlet var lblStarPoints: UILabel!
     
     //TIMER
     @IBOutlet weak var displayTimeLabel: UILabel!
     
-    
-    
+    var travelType: String!
+    var userSettings: Array<String>!
     var locationManager: CLLocationManager!
     var totalDistane: Double = 0
     var isUserTracking: Bool = false
@@ -30,7 +32,11 @@ class Aktiv: UIViewController, CLLocationManagerDelegate {
     var startTimeDate = NSDate()        // Ny tid
     var timer:NSTimer = NSTimer()
     var paused = true
+    var factor: Double = 0.0
+    var starPoints: Int = 0
+    var defaults: NSUserDefaults!
     
+
     
     //BILLEDER::::
     
@@ -93,6 +99,55 @@ class Aktiv: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        defaults = NSUserDefaults.standardUserDefaults()
+        if let user = defaults.stringForKey("currentUser"){
+            userSettings = split(user) {$0 == ":"}
+            
+            var typeBurn = 0.0
+            switch(travelType){
+                case "0":
+                    if userSettings[0] == "0" {
+                        typeBurn = 0.3
+                    }
+                    else{
+                        typeBurn = 0.27
+                    }
+                    break;
+                case "1":
+                    if userSettings[0] == "0" {
+                        typeBurn = 0.86
+                    }
+                    else{
+                        typeBurn = 0.78
+                    }
+                    break;
+                case "2":
+                    if userSettings[0] == "0" {
+                        typeBurn = 0.4
+                    }
+                    else{
+                        typeBurn = 0.36
+                    }
+                    break;
+            default:
+                println("Should not be here")
+                break;
+            }
+            factor = typeBurn * (userSettings[2] as NSString).doubleValue
+        }
+        else{
+            println("No user is created")
+        }
+        if defaults.objectForKey("starPoints") != nil{
+            starPoints = defaults.integerForKey("starPoints")
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        defaults.setInteger(starPoints, forKey: "starPoints")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         createLocationManager()
@@ -127,6 +182,7 @@ class Aktiv: UIViewController, CLLocationManagerDelegate {
                     let delta: CLLocationDistance = firstLocation.distanceFromLocation(oldLocation)
                     totalDistane += delta
                     updateDistanceLabel()
+                    
                 }
             }
             
@@ -159,11 +215,11 @@ class Aktiv: UIViewController, CLLocationManagerDelegate {
         var elapsedTime: NSTimeInterval = currentTime - startTime
         
         //calculate the minutes in elapsed time.
-        let minutes = UInt8(elapsedTime / 60.0)
+        let minutes = Int(elapsedTime / 60.0)
         elapsedTime -= (NSTimeInterval(minutes) * 60)
         
         //calculate the seconds in elapsed time.
-        let seconds = UInt8(elapsedTime)
+        let seconds = Int(elapsedTime)
         elapsedTime -= NSTimeInterval(seconds)
         
         //find out the fraction of milliseconds to be displayed.
@@ -176,6 +232,18 @@ class Aktiv: UIViewController, CLLocationManagerDelegate {
         
         //concatenate minutes, seconds and milliseconds as assign it to the UILabel
         displayTimeLabel.text = String("\(strMinutes):\(strSeconds):\(strFraction)")
+        println("Seconds: \(Double(seconds))")
+        println("Minutes: \(Double(minutes))")
+        println("Fraction: \(Double(fraction))")
+        let kcal = (Double(minutes) + (Double(seconds)/60) + (Double(fraction)/60/100)) * factor * 0.24
+        lblCalories.text = "Kcal: \(Double(round(10*kcal)/10))"
+        if userSettings[0] == "1"{
+            starPoints = Int(kcal * 1.48)
+        }
+        else{
+            starPoints = Int(kcal * 1.33)
+        }
+        lblStarPoints.text = "\(starPoints)"
     }
 
     

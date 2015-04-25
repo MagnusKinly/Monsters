@@ -11,39 +11,63 @@ import UIKit
 class ViewController: UIViewController {
     
  
-    
+    var currentage: Int = 13
+    var currentWeight: Int = 35
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let user = defaults.stringForKey("currentUser"){
+            self.view.hidden = true;
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let user = defaults.stringForKey("currentUser") {
+            println("this should work")
+            self.performSegueWithIdentifier("initial", sender: self)
+        }
+    }
+    
+    @IBOutlet var sex: UISegmentedControl!
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    @IBOutlet weak var slider: UISlider!
+
+    @IBAction func sliderAgeChanged(sender: UISlider) {
+        
+        currentage = Int(sender.value)
+        
+        label.text = "\(currentage)"
+    }
+    @IBAction func sliderWeightChanged(sender: UISlider) {
+        currentWeight = Int(sender.value)
+        labelWeight.text = "\(currentWeight)"
+    }
+    
 
     @IBOutlet weak var label: UILabel!
-    @IBAction func sliderValueChanged(sender: UISlider) {
-        
-        var currentValue = Int(sender.value)
-        
-        label.text = "\(currentValue)"
+    @IBOutlet weak var labelWeight: UILabel!
+    
+
+    
+    @IBAction func start(sender: UIButton) {
+        //let defaults = NSUserDefaults.standardUserDefaults();
+       // defaults.setObject(, forKey: "settings");
+        var saveValue = "\(sex.selectedSegmentIndex):\(currentage):\(currentWeight):"
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(saveValue, forKey: "currentUser")
+        performSegueWithIdentifier("initial", sender: self)
     }
-    
-    @IBOutlet weak var Slider1: UISlider!
-    
-    @IBOutlet weak var label1: UILabel!
-    
-    @IBAction func slider1ValueChanged(sender: UISlider) {
-        
-        var currentValue = Int(sender.value)
-        
-        label1.text = "\(currentValue)"
-    }
-    
     
     
  

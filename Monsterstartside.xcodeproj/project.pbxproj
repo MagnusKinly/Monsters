@@ -15,7 +15,6 @@
 		F7C3C2B11AE677BF00860329 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C3C2B01AE677BF00860329 /* CoreLocation.framework */; };
 		F7C3C2B31AE677D800860329 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7C3C2B21AE677D800860329 /* MapKit.framework */; };
 		F7C3C2B61AE780BB00860329 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7C3C2B41AE780BB00860329 /* Main.storyboard */; };
-		F7C3C3231AE7B5F400860329 /* Indkøb Pop Up in Resources */ = {isa = PBXBuildFile; fileRef = F7C3C3221AE7B5F300860329 /* Indkøb Pop Up */; };
 		F7C3C32B1AE7B88400860329 /* Shop.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C3C32A1AE7B88400860329 /* Shop.m */; };
 		F7E0F2E81AE11894008DEC96 /* GO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E0F2E71AE11894008DEC96 /* GO.swift */; };
 		F7E0F2EA1AE119AC008DEC96 /* Aktiv.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E0F2E91AE119AC008DEC96 /* Aktiv.swift */; };
@@ -44,7 +43,6 @@
 		F7C3C2B01AE677BF00860329 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F7C3C2B21AE677D800860329 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F7C3C2B51AE780BB00860329 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F7C3C3221AE7B5F300860329 /* Indkøb Pop Up */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Indkøb Pop Up"; path = "../../../../Indkøb Pop Up/Indkøb Pop Up"; sourceTree = "<group>"; };
 		F7C3C3281AE7B88300860329 /* Monsterstartside-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Monsterstartside-Bridging-Header.h"; sourceTree = "<group>"; };
 		F7C3C3291AE7B88400860329 /* Shop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shop.h; sourceTree = "<group>"; };
 		F7C3C32A1AE7B88400860329 /* Shop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shop.m; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 		F74B4B581ADD11D600B0C5D9 /* Monsterstartside */ = {
 			isa = PBXGroup;
 			children = (
-				F7C3C3221AE7B5F300860329 /* Indkøb Pop Up */,
 				F7C3C2B21AE677D800860329 /* MapKit.framework */,
 				F7C3C2B01AE677BF00860329 /* CoreLocation.framework */,
 				F74B4B5B1ADD11D600B0C5D9 /* AppDelegate.swift */,
@@ -222,7 +219,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7C3C2B61AE780BB00860329 /* Main.storyboard in Resources */,
-				F7C3C3231AE7B5F400860329 /* Indkøb Pop Up in Resources */,
 				F74B4B661ADD11D600B0C5D9 /* LaunchScreen.xib in Resources */,
 				F74B4B631ADD11D600B0C5D9 /* Images.xcassets in Resources */,
 			);
